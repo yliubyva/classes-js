@@ -14,13 +14,14 @@ class Marker {
         break;
       }
 
-      if (char !== " ") {
-        if (this.inkLevel >= 0.5) {
-          result += char;
-          this.inkLevel -= 0.5;
-        }
-      } else {
+      const isAllowedInkLevel = this.inkLevel >= 0.5;
+
+      if (char === " " || isAllowedInkLevel) {
         result += char;
+      }
+
+      if (char !== " " && isAllowedInkLevel) {
+        this.inkLevel -= 0.5;
       }
     }
 
